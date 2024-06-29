@@ -9,4 +9,5 @@ public interface EmpleadoDAO {
     public String editarUsuario(Empleado empleado);
     public List<Empleado> consultarUsuarios();
     public Empleado consultarUsuarioPorId(int id);
+    public List<Empleado> consultarUsuarioPorCorreo(String correo);
 }

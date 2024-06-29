@@ -147,5 +147,37 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
             ConexionDB.closeConnection(conn);
         }
     }
+
+    @Override
+    public List<Empleado> consultarUsuarioPorCorreo(String correo) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        List<Empleado> empleados = new ArrayList<>();
+
+        try {
+            conn = ConexionDB.getConnection();
+            String sql = "SELECT * FROM empleados WHERE correo_electronico=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, correo);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id_empleado");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                //correo = rs.getString("correo_electronico");
+                String clave = rs.getString("clave");
+                Empleado empleado = new Empleado(id, nombre, apellido, correo, clave);
+                empleados.add(empleado);
+            }
+            return empleados;
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+            //request.setAttribute("error", "Error al autenticar Usuario");
+        } finally {
+            ConexionDB.closeConnection(conn);
+        }
+    }
     
 }
