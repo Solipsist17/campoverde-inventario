@@ -22,6 +22,10 @@ public class Empleado {
         this.clave = clave;
     }
 
+    public Empleado(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Empleado(int id) {
         this.id = id;
     }

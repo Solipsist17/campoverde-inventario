@@ -25,6 +25,10 @@ public class Producto {
         this.ubicacion = ubicacion;
     }
 
+    public Producto(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Producto(int id) {
         this.id = id;
     }

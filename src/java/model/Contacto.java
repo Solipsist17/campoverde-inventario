@@ -1,18 +1,24 @@
 package model;
 
-public class Cliente {
+public class Contacto {
     private int id;
     private String nombre;
     private String telefono;
     private String direccion;
     private String correo;
+    private TipoContacto tipoContacto;
 
-    public Cliente(int id, String nombre, String telefono, String direccion, String correo) {
+    public Contacto(int id, String nombre, String telefono, String direccion, String correo, TipoContacto tipoContacto) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
         this.correo = correo;
+        this.tipoContacto = tipoContacto;
+    }
+
+    public Contacto(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getId() {
@@ -55,4 +61,13 @@ public class Cliente {
         this.correo = correo;
     }
 
+    public TipoContacto getTipoContacto() {
+        return tipoContacto;
+    }
+
+    public void setTipoContacto(TipoContacto tipoContacto) {
+        this.tipoContacto = tipoContacto;
+    }
+    
+    
 }
