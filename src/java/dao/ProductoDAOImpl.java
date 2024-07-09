@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Categoria;
-import model.Empleado;
 import model.Producto;
 import model.Ubicacion;
 import utils.ConexionDB;

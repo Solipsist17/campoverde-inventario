@@ -12,6 +12,16 @@ public class Movimiento {
     private Date fechaMovimiento;
     private TipoMovimiento tipoMovimiento;
 
+    public Movimiento(Contacto contacto, Empleado empleado, Producto producto, double precio, int cantidad, Date fechaMovimiento, TipoMovimiento tipoMovimiento) {
+        this.contacto = contacto;
+        this.empleado = empleado;
+        this.producto = producto;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.fechaMovimiento = fechaMovimiento;
+        this.tipoMovimiento = tipoMovimiento;
+    }
+    
     public Movimiento(int id, Contacto contacto, Empleado empleado, Producto producto, double precio, int cantidad, Date fechaMovimiento, TipoMovimiento tipoMovimiento) {
         this.id = id;
         this.contacto = contacto;

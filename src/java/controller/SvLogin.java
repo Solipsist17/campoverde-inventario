@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Empleado;
@@ -40,6 +39,48 @@ public class SvLogin extends HttpServlet {
         processRequest(request, response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String email = request.getParameter("email");
+        String clave = request.getParameter("clave");
+        
+        //boolean isValido = false;
+        Empleado empleado = validarLogin(email, clave);
+        
+        if (empleado != null) {
+            HttpSession miSession = request.getSession(true); // creamos la sesión
+            //miSession.setAttribute("email", email);
+            miSession.setAttribute("usuario", empleado); // almacenando el objeto en sesión 
+            response.sendRedirect("index.jsp");
+        } else {
+            //response.sendRedirect("loginError.jsp");
+            request.setAttribute("message", "Email o contraseña incorrecto");
+            //response.sendRedirect("login.jsp");
+            request.getRequestDispatcher("login.jsp").forward(request, response); // redirigir 
+        }
+    }
+    
+    private Empleado validarLogin(String email, String clave) {
+        //boolean login = false;
+        Empleado empleado = new Empleado();
+        
+        List<Empleado> listaEmpleados = new ArrayList<>();
+        EmpleadoDAO dao = new EmpleadoDAOImpl();
+        listaEmpleados = dao.consultarUsuarioPorCorreo(email);
+        for (Empleado e : listaEmpleados) {
+            if (e.getClave().equals(clave)) {
+                empleado = e;
+            } else {
+                empleado = null;
+            }
+        }
+        
+        return empleado;
+    }
+    
+    /* 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -78,6 +119,8 @@ public class SvLogin extends HttpServlet {
         
         return login;
     }
+    
+    */
 
     @Override
     public String getServletInfo() {

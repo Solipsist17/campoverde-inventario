@@ -26,8 +26,10 @@
     <div class="form-group">
         <select class="custom-select custom-select-user form-control form-control-sm" name="categoria" title="categoria" required>
             <option value="" disabled selected>Categoría</option>
+            <% if (categorias != null) { %>
             <% for (Categoria categoria : categorias) { %>
             <option value="<%= categoria.getId() %>"><%= categoria.getNombre() %></option>
+            <% } %>
             <% } %>
         </select>
     </div>
@@ -35,8 +37,10 @@
     <div class="form-group">
         <select class="custom-select custom-select-user form-control form-control-sm" name="ubicacion" title="ubicacion" required>
             <option value="" disabled selected>Ubicación</option>
+            <% if (ubicaciones != null) { %>
             <% for (Ubicacion ubicacion : ubicaciones) { %>
             <option value="<%= ubicacion.getId() %>"><%= ubicacion.getDireccion() %></option>
+            <% } %>
             <% } %>
         </select>
     </div>

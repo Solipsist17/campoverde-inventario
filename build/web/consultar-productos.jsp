@@ -49,6 +49,7 @@
             		List<Producto> productos = (List) request.getSession().getAttribute("listaProductos");
         	    %>
                     <tbody>
+                        <% if (productos != null) { %>                        
 			<% for (Producto producto : productos) { %>
                         <tr>
                             <td id="id_prod<%= producto.getId() %>"><%= producto.getId() %></td>
@@ -76,6 +77,7 @@
                             </td>
                         </tr>
 			<% } %>
+                        <% } %>
                     </tbody>
                 </table>
             </div>

@@ -1,12 +1,19 @@
 package model;
 
-public class Empleado {
+import java.io.Serializable;
+
+public class Empleado implements Serializable {
     private int id;
     private String nombre;
     private String apellido;
     private String correo;
     private String clave;
 
+    public Empleado() {
+    }
+    
+    
+    
     public Empleado(int id, String nombre, String apellido, String correo, String clave) {
         this.id = id;
         this.nombre = nombre;

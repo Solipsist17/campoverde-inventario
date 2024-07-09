@@ -1,5 +1,9 @@
 package controller;
 
+import dao.ContactoDAO;
+import dao.ContactoDAOImpl;
+import dao.EmpleadoDAO;
+import dao.EmpleadoDAOImpl;
 import dao.ProductoDAO;
 import dao.ProductoDAOImpl;
 import jakarta.servlet.ServletException;
@@ -12,16 +16,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import model.Categoria;
+import model.Contacto;
+import model.Empleado;
 import model.Producto;
-import model.Ubicacion;
 
-/**
- *
- * @author Sebastian Vasquez
- */
-@WebServlet(name = "SvProductos", urlPatterns = {"/SvProductos"})
-public class SvProductos extends HttpServlet {
+@WebServlet(name = "SvDatosMovimientos", urlPatterns = {"/SvDatosMovimientos"})
+public class SvDatosMovimientos extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,56 +31,48 @@ public class SvProductos extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SvProductos</title>");            
+            out.println("<title>Servlet SvDatosMovimientos</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SvProductos at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SvDatosMovimientos at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    // CONSULTAR PRODUCTO
+    // CARGAR DATOS CONTACTO, EMPLEADO Y PRODUCTO
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        List<Contacto> contactos = new ArrayList<>();
+        ContactoDAO contactoDAO = new ContactoDAOImpl();
+        contactos = contactoDAO.consultarContactos();
+        
+        List<Empleado> empleados = new ArrayList<>();
+        EmpleadoDAO empleadoDAO = new EmpleadoDAOImpl();
+        empleados = empleadoDAO.consultarUsuarios();
+        
         List<Producto> productos = new ArrayList<>();
-        ProductoDAO dao = new ProductoDAOImpl();
-        productos = dao.consultarProductos();
+        ProductoDAO productoDAO = new ProductoDAOImpl();
+        productos = productoDAO.consultarProductos();
         
         HttpSession session = request.getSession();
+        session.setAttribute("listaContactos", contactos);
+        session.setAttribute("listaEmpleados", empleados);
         session.setAttribute("listaProductos", productos);
         
+        System.out.println(contactos);
+        System.out.println(empleados);
         System.out.println(productos);
-                
-        response.sendRedirect("consultar-productos.jsp");
+        
+        response.sendRedirect("registrar-movimiento.jsp");
     }
 
-    // REGISTRAR PRODUCTO
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String nombre = request.getParameter("nombre");
-        int idCategoria = Integer.parseInt(request.getParameter("categoria"));
-        int idUbicacion = Integer.parseInt(request.getParameter("ubicacion"));
-        int stock = Integer.parseInt(request.getParameter("stock"));
-        double precio = Double.parseDouble(request.getParameter("precio"));
-        
-        Producto producto = new Producto(nombre, stock, precio, new Categoria(idCategoria), new Ubicacion(idUbicacion));
-        ProductoDAO dao = new ProductoDAOImpl();
-        
-        String message = "";
-        if (dao.registrarProducto(producto)) {
-            message = "Producto registrado exitosamente";
-            System.out.println(producto);
-        } else {
-            message = "Error al registrar producto";
-        }
-        request.setAttribute("message", message);
-        
-        response.sendRedirect("SvDatosProductos");
+        processRequest(request, response);
     }
 
     @Override

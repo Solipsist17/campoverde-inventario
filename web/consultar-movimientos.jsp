@@ -26,9 +26,9 @@
                     <thead>
                         <tr>
                             <th>ID Movimiento</th>
-                            <th>ID Contacto</th>
-                            <th>ID Empleado</th>
-                            <th>ID Producto</th>
+                            <th>Contacto</th>
+                            <th>Empleado</th>
+                            <th>Producto</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
                             <th>Fecha</th>
@@ -53,9 +53,9 @@
             		List<Movimiento> movimientos = (List) request.getSession().getAttribute("listaMovimientos");
         	    %>
                     <tbody>
+                        <% if (movimientos != null) { %>
 			<% for (Movimiento movimiento : movimientos) { %>
                         <tr>
-                            <!<!-- ARREGLAR ESTO -->
                             <td id="id_mov<%= movimiento.getId() %>"><%= movimiento.getId() %></td>
                 	    <td><%= movimiento.getContacto().getNombre() %></td>
                 	    <td><%= movimiento.getEmpleado().getNombre() %></td>
@@ -83,6 +83,7 @@
                             </td>
                         </tr>
 			<% } %>
+                        <% } %>
                     </tbody>
                 </table>
             </div>

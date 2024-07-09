@@ -12,10 +12,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Contacto;
+import model.Empleado;
 import model.Movimiento;
 import model.Producto;
+import model.TipoMovimiento;
 
 @WebServlet(name = "SvMovimientos", urlPatterns = {"/SvMovimientos"})
 public class SvMovimientos extends HttpServlet {
@@ -55,10 +63,44 @@ public class SvMovimientos extends HttpServlet {
         response.sendRedirect("consultar-movimientos.jsp");
     }
 
+    // REGISTRAR MOVIMIENTO
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        int idContacto = Integer.parseInt(request.getParameter("contacto"));
+        int idEmpleado = Integer.parseInt(request.getParameter("empleado"));
+        int idProducto = Integer.parseInt(request.getParameter("producto"));
+        double precio = Double.parseDouble(request.getParameter("precio"));
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        
+        String fechaStr = request.getParameter("fecha");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = new Date();
+        try {
+            fecha = dateFormat.parse(fechaStr);
+        } catch (ParseException ex) {
+            System.out.println(ex.getMessage());;
+        }
+        
+        String tipoStr = request.getParameter("tipo").toUpperCase();
+        TipoMovimiento tipo = TipoMovimiento.valueOf(tipoStr);
+        
+        Movimiento movimiento = new Movimiento(new Contacto(idContacto), new Empleado(idEmpleado), new Producto(idProducto), precio, cantidad, fecha, tipo);
+        MovimientoDAO dao = new MovimientoDAOImpl();
+        
+        String message = "";
+        if (dao.registrarMovimiento(movimiento)) {
+            message = "Movimiento registrado exitosamente";
+            request.getSession().setAttribute("message", 1);
+            System.out.println(movimiento);
+        } else {
+            request.getSession().setAttribute("message", 0);
+            message = "Error al registrar moviiento";
+        }
+        request.setAttribute("message", message);
+        
+        response.sendRedirect("SvDatosMovimientos");
     }
 
     @Override

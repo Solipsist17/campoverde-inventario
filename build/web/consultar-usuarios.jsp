@@ -45,6 +45,7 @@
             		List<Empleado> empleados = (List) request.getSession().getAttribute("listaUsuarios");
         	    %>
                     <tbody>
+                        <% if (empleados != null) { %>
 			<% for (Empleado empleado : empleados) { %>
                         <tr>
                             <td id="id_usu<%= empleado.getId() %>"><%= empleado.getId() %></td>
@@ -70,6 +71,7 @@
                             </td>
                         </tr>
 			<% } %>
+                        <% } %>
                     </tbody>
                 </table>
             </div>

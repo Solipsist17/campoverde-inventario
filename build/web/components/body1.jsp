@@ -1,11 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="model.Empleado" %>
 <body id="page-top">
     
     <!<!-- Validación Sesión -->
     <% 
         HttpSession miSession = request.getSession();
-        String usuario = (String) miSession.getAttribute("email");
-        if (usuario == null) {
+        //String usuario = (String) miSession.getAttribute("email");
+        Empleado u = (Empleado) miSession.getAttribute("usuario");
+        if (u == null) {
             response.sendRedirect("login.jsp");
         } 
     %>
@@ -345,7 +347,13 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("email")%></span>
+                                <%
+                                    String nombreCompleto = "";
+                                    if (u != null) {
+                                        nombreCompleto = u.getNombre() + " " + u.getApellido();
+                                    }
+                                %>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=nombreCompleto%></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
