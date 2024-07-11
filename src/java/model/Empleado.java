@@ -7,6 +7,13 @@ public class Empleado {
     private String correo;
     private String clave;
 
+    public Empleado() {
+    }
+
+    public Empleado(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public Empleado(int id, String nombre, String apellido, String correo, String clave) {
         this.id = id;
         this.nombre = nombre;
@@ -27,10 +34,10 @@ public class Empleado {
     }
     
     // Constructor adicional para manejar la búsqueda dinámica desde el servlet
-    public Empleado(int id, String nombre, String apellido) {
+    public Empleado(int idEmpleado, String nombre, String apellido) {
         this.id = id;
         this.nombre = nombre;
-        this.apellido = apellido;
+        this.apellido = apellido;    
     }
 
     public int getId() {
