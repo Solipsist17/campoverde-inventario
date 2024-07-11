@@ -1,19 +1,12 @@
 package model;
 
-import java.io.Serializable;
-
-public class Empleado implements Serializable {
+public class Empleado {
     private int id;
     private String nombre;
     private String apellido;
     private String correo;
     private String clave;
 
-    public Empleado() {
-    }
-    
-    
-    
     public Empleado(int id, String nombre, String apellido, String correo, String clave) {
         this.id = id;
         this.nombre = nombre;
@@ -29,12 +22,15 @@ public class Empleado implements Serializable {
         this.clave = clave;
     }
 
-    public Empleado(String nombre) {
-        this.nombre = nombre;
-    }
-
     public Empleado(int id) {
         this.id = id;
+    }
+    
+    // Constructor adicional para manejar la búsqueda dinámica desde el servlet
+    public Empleado(int id, String nombre, String apellido) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
     public int getId() {
@@ -76,6 +72,5 @@ public class Empleado implements Serializable {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    
-    
 }
+
