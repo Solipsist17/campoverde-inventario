@@ -3,44 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/controller/SvLogin.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/dao/ContactoDAO.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/registrar-compra.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/controller/SvEditProductos.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/registrar-producto.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/model/TipoContacto.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/consultar-usuarios.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/consultar-productos.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/registrar-movimiento.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/controller/SvDatosMovimientos.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/components/body1.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/controller/SvElimUsuarios.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/dao/CategoriaDAOImpl.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/dao/EmpleadoDAOImpl.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/editar-producto.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/consultar-ventas.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/dao/EmpleadoDAO.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/loginError.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/components/body2.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/consultar-movimientos.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/model/Empleado.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/dao/MovimientoDAOImpl.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/login.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/registrar-usuario.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/dao/ContactoDAOImpl.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/dao/MovimientoDAO.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/editar-usuario.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/css/sb-admin-2.css</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/components/head.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/controller/SvMovimientos.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/controller/SvEditUsuarios.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/web/consultar-compras.jsp</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/model/Contacto.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/model/Movimiento.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/dao/CategoriaDAO.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/controller/SvProductos.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/controller/SvDatosProductos.java</file>
-            <file>file:/C:/Users/Sebastian%20Vasquez/Documents/NetBeansProjects/ProyectoCampoVerde1/src/java/dao/ProductoDAOImpl.java</file>
+            <file>file:/C:/Users/josue/Desktop/UTP/Ciclo%206/Desarrollo%20web%20integrado/ProyectoActual/campoverde-inventario/src/java/dao/MovimientoDAOImpl.java</file>
+            <file>file:/C:/Users/josue/Desktop/UTP/Ciclo%206/Desarrollo%20web%20integrado/ProyectoActual/campoverde-inventario/src/java/utils/ConexionDB.java</file>
+            <file>file:/C:/Users/josue/Desktop/UTP/Ciclo%206/Desarrollo%20web%20integrado/ProyectoActual/campoverde-inventario/src/java/model/Empleado.java</file>
         </group>
     </open-files>
 </project-private>
