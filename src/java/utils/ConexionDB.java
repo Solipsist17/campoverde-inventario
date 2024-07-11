@@ -8,7 +8,7 @@ public class ConexionDB {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dbcampoverde";
     private static final String USER = "root";
-    private static final String PASS = "Charlie321";
+    private static final String PASS = "1234";
 
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName(JDBC_DRIVER);

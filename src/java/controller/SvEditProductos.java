@@ -2,8 +2,6 @@ package controller;
 
 import dao.CategoriaDAO;
 import dao.CategoriaDAOImpl;
-import dao.EmpleadoDAO;
-import dao.EmpleadoDAOImpl;
 import dao.ProductoDAO;
 import dao.ProductoDAOImpl;
 import dao.UbicacionDAO;
@@ -19,7 +17,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Categoria;
-import model.Empleado;
 import model.Producto;
 import model.Ubicacion;
 
@@ -67,7 +64,7 @@ public class SvEditProductos extends HttpServlet {
         ProductoDAO dao = new ProductoDAOImpl();
         Producto producto = dao.consultarProductoPorId(id);
         
-        if (producto.equals(null)) {
+        if (producto == null) {
             request.setAttribute("message", "Error al cargar datos");
             return;
         }

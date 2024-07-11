@@ -71,7 +71,7 @@ public class MovimientoDAOImpl implements MovimientoDAO{
             stmt.setDouble(4, movimiento.getPrecio());
             stmt.setInt(5, movimiento.getCantidad());
             
-            java.util.Date dateUtil = movimiento.getFechaMovimiento(); // Supongamos que tienes un objeto java.util.Date
+            java.util.Date dateUtil = movimiento.getFechaMovimiento(); // objeto java.util.Date
             java.sql.Date dateSql = new java.sql.Date(dateUtil.getTime());
             stmt.setDate(6, dateSql);
             
@@ -81,6 +81,62 @@ public class MovimientoDAOImpl implements MovimientoDAO{
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            ConexionDB.closeConnection(conn);
+        }
+    }
+
+    @Override
+    public boolean eliminarMovimiento(Movimiento movimiento) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            conn = ConexionDB.getConnection();
+            String sql = "DELETE FROM movimientos WHERE id_movimiento=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, movimiento.getId());
+            stmt.executeUpdate();
+            return true;
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            ConexionDB.closeConnection(conn);
+        }
+    }
+
+    @Override
+    public Movimiento consultarMovimientoPorId(int id) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        Movimiento movimiento = null;
+
+        try {
+            conn = ConexionDB.getConnection();
+            String sql = "SELECT * FROM movimientos WHERE id_movimiento=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int idContacto = rs.getInt("id_contacto");
+                int idEmpleado = rs.getInt("id_empleado");
+                int idProducto = rs.getInt("id_producto");
+                double precio = rs.getDouble("precio");
+                int cantidad = rs.getInt("cantidad");
+                java.sql.Date dateSql = rs.getDate("fecha_movimiento");
+                java.util.Date fecha = new java.util.Date(dateSql.getTime());
+                
+                String tipoStr = rs.getString("tipo_movimiento");
+                TipoMovimiento tipo = TipoMovimiento.valueOf(tipoStr);
+                                
+                movimiento = new Movimiento(id, new Contacto(idContacto), new Empleado(idEmpleado), new Producto(idProducto), precio, cantidad, fecha, tipo);
+            }
+            return movimiento;
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
         } finally {
             ConexionDB.closeConnection(conn);
         }

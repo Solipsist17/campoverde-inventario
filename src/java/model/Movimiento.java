@@ -33,6 +33,10 @@ public class Movimiento {
         this.tipoMovimiento = tipoMovimiento;
     }
 
+    public Movimiento(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

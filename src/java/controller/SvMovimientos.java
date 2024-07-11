@@ -54,9 +54,6 @@ public class SvMovimientos extends HttpServlet {
         MovimientoDAO dao = new MovimientoDAOImpl();
         movimientos = dao.consultarMovimientos();
         
-        //System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
-        //System.out.println(movimientos);
-        
         HttpSession session = request.getSession();
         session.setAttribute("listaMovimientos", movimientos);
                 
@@ -96,7 +93,7 @@ public class SvMovimientos extends HttpServlet {
             System.out.println(movimiento);
         } else {
             request.getSession().setAttribute("message", 0);
-            message = "Error al registrar moviiento";
+            message = "Error al registrar movimiento";
         }
         request.setAttribute("message", message);
         

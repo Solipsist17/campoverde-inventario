@@ -7,6 +7,7 @@
 <%@include file="components/head.jsp" %>
 <%@include file="components/body1.jsp" %>
 
+<!-- Altert Message -->
 <%
 Object messageObj = miSession.getAttribute("message");
 if (messageObj != null) {
@@ -102,7 +103,7 @@ if (messageObj != null) {
         </select>
     </div>  
 
-    <button class="btn btn-success btn-user btn-block" type="submit">Registrar Producto</button>
+    <button class="btn btn-success btn-user btn-block" type="submit">Registrar Movimiento</button>
     <hr>
 </form>
 
