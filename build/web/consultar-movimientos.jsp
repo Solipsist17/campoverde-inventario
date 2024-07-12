@@ -14,7 +14,7 @@ if (messageObj != null) {
     int message = Integer.parseInt(messageObj.toString());
 %>
 <div class="alert alert-<%= (message == 1) ? "success" : "danger" %> alert-dismissible fade show" role="alert">
-    <%= (message == 1) ? "¡Eliminación exitosa!" : "¡Eliminación fallida!" %>
+    <%= (message == 1) ? "¡Acción exitosa!" : "¡Acción fallida!" %>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>

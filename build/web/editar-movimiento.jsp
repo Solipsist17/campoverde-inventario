@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="model.Movimiento, model.Contacto, model.Empleado, model.Producto, model.TipoMovimiento, java.util.List, java.text.SimpleDateFormat, java.text.ParseException, java.util.Date"%>
+<%@page import="model.Movimiento, model.Contacto, model.Empleado, model.Producto, model.TipoMovimiento, java.util.List, java.time.LocalDateTime, java.time.ZoneId, java.time.ZonedDateTime, java.time.format.DateTimeFormatter, java.util.Locale"%>
 <!DOCTYPE html>
 <html lang="en">
 <%@include file="components/head.jsp" %>
@@ -16,21 +16,22 @@
     List<Producto> productos = (List) request.getSession().getAttribute("listaProductos");
 %>
 
-<form class="user" action="SvEditProductos" method="post">
+<% if (contactos != null && empleados != null && productos != null) { %>
+<form class="user" action="SvEditMovimientos" method="post">
     <p>${message}</p>
 
     <div class="form-group">
         <select class="custom-select custom-select-user form-control form-control-sm" name="contacto" title="contacto" required>
             <option value="" disabled selected>Contacto</option>
-            <% for (Contacto contacto : contactos) { %>
             
+            <% for (Contacto contacto : contactos) { %>
             <option value="<%= contacto.getId() %>" 
             <% // seleccionamos los datos anteriores
                 if (contacto.getId() == movimiento.getContacto().getId()) { 
             %>
             selected
             <% } %>>
-            <%= contacto.getNombre() %>
+            <%= contacto.getNombre() %> - <%= contacto.getTipoContacto() %>
             </option>
             
             <% } %>
@@ -40,17 +41,17 @@
     <div class="form-group">
         <select class="custom-select custom-select-user form-control form-control-sm" name="empleado" title="empleado" required>
             <option value="" disabled selected>Empleado</option>
-            <!-- CAMBIAR ESTO POR SOLO EL EMPLEADO ACTUAL -->
-            
-            <% for (Empleado empleado : empleados) { %>
-            
-            <option value="<%= empleado.getId() %>" 
+            <% 
+                Empleado usuarioActual = (Empleado) request.getSession().getAttribute("usuario");
+                if (usuarioActual != null) { 
+            %>
+            <option value="<%= usuarioActual.getId() %>" 
             <% // seleccionamos los datos anteriores
-                if (empleado.getId() == movimiento.getEmpleado().getId()) { 
+                if (usuarioActual.getId() == movimiento.getEmpleado().getId()) {
             %>
             selected
-            <% } %>>
-            <%= empleado.getNombre() %>
+            <%  } %>>
+            <%=usuarioActual.getNombre()%> <%=usuarioActual.getApellido()%>
             </option>
             
             <% } %>
@@ -86,24 +87,31 @@
     </div>
     
     <div class="form-group">
-        <input type="date" class="form-control form-control-user" id="fecha" name="fecha"
-               placeholder="Fecha" required value="<%= movimiento.getFechaMovimiento().toString() %>">
         <% 
+        // FORMATEAR LA FECHA
         
-        String fechaOriginal = "Sun Jul 05 00:00:00 PET 2020";
-        SimpleDateFormat formatoOriginal = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        // La fecha en formato inicial
+        String dateStr = movimiento.getFechaMovimiento().toString();
 
-        try {
-            Date fecha = formatoOriginal.parse(fechaOriginal);
-            SimpleDateFormat formatoDeseado = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaFormateada = formatoDeseado.format(fecha);
+        // Definir el formateador para el formato inicial
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
 
-            System.out.println("Fecha formateada: " + fechaFormateada);
-        } catch (ParseException e) {
-            System.err.println("Error al analizar la fecha: " + e.getMessage());
-        }
-                    
+        // Parsear la fecha inicial a un objeto ZonedDateTime
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(dateStr, formatter);
+
+        // Convertir a LocalDateTime
+        LocalDateTime localDateTime = zonedDateTime.toLocalDateTime();
+
+        // Definir el formateador para el formato final
+        DateTimeFormatter finalFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // Formatear la fecha a YYYY-MM-DD
+        String formattedDate = localDateTime.format(finalFormatter);
         %>
+        
+        <input type="date" class="form-control form-control-user" id="fecha" name="fecha"
+               placeholder="Fecha" required value="<%= formattedDate %>">
+        
     </div>
     
     <div class="form-group">
@@ -128,7 +136,7 @@
     <button class="btn btn-success btn-user btn-block" type="submit">Editar Movimiento</button>
     <hr>
 </form>
-
+<% } %>
 
 <%@include file="components/body2.jsp" %>  
 </html>

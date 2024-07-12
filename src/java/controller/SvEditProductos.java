@@ -45,7 +45,7 @@ public class SvEditProductos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // cargar los datos de categoria y ubicacion
+        // cargar categorias y ubicacion
         List<Categoria> categorias = new ArrayList<>();
         CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
         categorias = categoriaDAO.consultarCategorias();

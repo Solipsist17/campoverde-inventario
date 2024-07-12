@@ -16,12 +16,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Contacto;
 import model.Empleado;
 import model.Movimiento;
 import model.Producto;
+import model.TipoMovimiento;
 
 /**
  *
@@ -52,7 +56,7 @@ public class SvEditMovimientos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // cargar los datos de contacto, empleado y producto
+        // cargar contactos, empleados y productos
         List<Contacto> contactos = new ArrayList<>();
         ContactoDAO contactoDAO = new ContactoDAOImpl();
         contactos = contactoDAO.consultarContactos();
@@ -82,8 +86,8 @@ public class SvEditMovimientos extends HttpServlet {
         }
         
         // guardamos los datos en session y redirigimos
-        //HttpSession session = request.getSession();
         session.setAttribute("movEditar", movimiento);
+        
         System.out.println("El movimiento es: " + movimiento);
         response.sendRedirect("editar-movimiento.jsp");
     }
@@ -92,7 +96,45 @@ public class SvEditMovimientos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        // traemos los datos del jsp
+        int idContacto = Integer.parseInt(request.getParameter("contacto"));
+        int idEmpleado = Integer.parseInt(request.getParameter("empleado"));
+        int idProducto = Integer.parseInt(request.getParameter("producto"));
+        double precio = Double.parseDouble(request.getParameter("precio"));
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        
+        String fechaStr = request.getParameter("fecha");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = new Date();
+        try {
+            fecha = dateFormat.parse(fechaStr);
+        } catch (ParseException ex) {
+            System.out.println(ex.getMessage());;
+        }
+        
+        String tipoStr = request.getParameter("tipo").toUpperCase();
+        TipoMovimiento tipo = TipoMovimiento.valueOf(tipoStr);
+        
+        // traemos los datos anteriores guardados en sesión
+        Movimiento movimiento = (Movimiento) request.getSession().getAttribute("movEditar");
+        movimiento.setContacto(new Contacto(idContacto));
+        movimiento.setEmpleado(new Empleado(idEmpleado));
+        movimiento.setProducto(new Producto(idProducto));
+        movimiento.setPrecio(precio);
+        movimiento.setCantidad(cantidad);
+        movimiento.setFechaMovimiento(fecha);
+        movimiento.setTipoMovimiento(tipo);
+        
+        MovimientoDAO dao = new MovimientoDAOImpl();
+        if (dao.editarMovimiento(movimiento)) {
+            request.getSession().setAttribute("message", 1);
+            System.out.println("movimiento editado: " + movimiento);
+        } else {
+            request.getSession().setAttribute("message", 0);
+        }
+        
+        response.sendRedirect("SvMovimientos");
     }
 
     @Override
