@@ -71,14 +71,12 @@ public class SvProductos extends HttpServlet {
         Producto producto = new Producto(nombre, stock, precio, new Categoria(idCategoria), new Ubicacion(idUbicacion));
         ProductoDAO dao = new ProductoDAOImpl();
         
-        String message = "";
         if (dao.registrarProducto(producto)) {
-            message = "Producto registrado exitosamente";
-            System.out.println(producto);
+            request.getSession().setAttribute("message", 1);
+            System.out.println("producto registrado: " + producto);
         } else {
-            message = "Error al registrar producto";
+            request.getSession().setAttribute("message", 0);
         }
-        request.setAttribute("message", message);
         
         response.sendRedirect("SvDatosProductos");
     }

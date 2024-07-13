@@ -72,8 +72,13 @@ public class SvEditUsuarios extends HttpServlet {
         empleado.setClave(clave);
         
         EmpleadoDAO dao = new EmpleadoDAOImpl();
-        String mensaje = dao.editarUsuario(empleado);
-        request.setAttribute("message", mensaje);
+        
+        if (dao.editarUsuario(empleado)) {
+            request.getSession().setAttribute("message", 1);
+            System.out.println("usuario editado: " + empleado);
+        } else {
+            request.getSession().setAttribute("message", 0);
+        }
         
         response.sendRedirect("SvUsuarios");
     }

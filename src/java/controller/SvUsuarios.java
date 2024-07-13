@@ -66,11 +66,17 @@ public class SvUsuarios extends HttpServlet {
                 
         Empleado empleado = new Empleado(nombre, apellido, correo, clave);
         EmpleadoDAO dao = new EmpleadoDAOImpl();
-        mensaje = dao.registrarUsuario(empleado);
         
-        request.setAttribute("message", mensaje);
+        if (dao.registrarUsuario(empleado)) {
+            request.getSession().setAttribute("message", 1);
+            System.out.println("usuario registrado: " + empleado);
+        } else {
+            request.getSession().setAttribute("message", 0);
+        }
+                
+        //request.getRequestDispatcher("registrar-usuario.jsp").forward(request, response); // redirigir 
         
-        request.getRequestDispatcher("registrar-usuario.jsp").forward(request, response); // redirigir 
+        response.sendRedirect("registrar-usuario.jsp");
     }
 
     @Override

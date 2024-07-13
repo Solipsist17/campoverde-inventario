@@ -95,17 +95,14 @@ public class SvEditProductos extends HttpServlet {
         producto.setPrecio(precio);
         
         ProductoDAO dao = new ProductoDAOImpl();
-        String mensaje = "";
+
         if (dao.editarProducto(producto)) {
-            mensaje = "Producto editado exitosamente";
+            request.getSession().setAttribute("message", 1);
+            System.out.println("producto editado: " + producto);
         } else {
-            mensaje = "Error al editar el producto";
+            request.getSession().setAttribute("message", 0);
         }
-        
-        System.out.println("Nuevo producto: " + producto.getCategoria().getId());
-             
-        request.setAttribute("message", mensaje);
-        
+                             
         response.sendRedirect("SvProductos");
     }
 

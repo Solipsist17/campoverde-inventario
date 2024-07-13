@@ -17,7 +17,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
     }*/
     
     @Override
-    public String registrarUsuario(Empleado empleado) {
+    public boolean registrarUsuario(Empleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         
@@ -31,18 +31,18 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
             stmt.setString(4, empleado.getClave());
             stmt.executeUpdate();
             //request.setAttribute("message", "Usuario registrado exitosamente");
-            return "Usuario registrado exitosamente";
+            return true;
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             //request.setAttribute("error", "Error al registrar Usuario");
-            return "Error al registrar Usuario";
+            return false;
         } finally {
             ConexionDB.closeConnection(conn);
         }
     }
 
     @Override
-    public String eliminarUsuario(Empleado empleado) {
+    public boolean eliminarUsuario(Empleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         
@@ -52,10 +52,10 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, empleado.getId());
             stmt.executeUpdate();
-            return "Usuario eliminado exitosamente";
+            return true;
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            return "Error al eliminar Usuario";
+            return false;
         } finally {
             ConexionDB.closeConnection(conn);
         }
@@ -94,7 +94,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
     }
 
     @Override
-    public String editarUsuario(Empleado empleado) {
+    public boolean editarUsuario(Empleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         
@@ -108,10 +108,10 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
             stmt.setString(4, empleado.getClave());
             stmt.setInt(5, empleado.getId());
             stmt.executeUpdate();
-            return "Usuario editado exitosamente";
+            return true;
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            return "Error al editar Usuario";
+            return false;
         } finally {
             ConexionDB.closeConnection(conn);
         }

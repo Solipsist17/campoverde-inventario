@@ -51,13 +51,13 @@ public class SvElimProductos extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Producto producto = new Producto(id);
         ProductoDAO dao = new ProductoDAOImpl();
-        String mensaje = "";
+
         if (dao.eliminarProducto(producto)) {
-            mensaje = "Producto eliminado exitosamente";
+            request.getSession().setAttribute("message", 1);
+            System.out.println("producto eliminado: " + producto);
         } else {
-            mensaje = "Error al eliminar el producto";
+            request.getSession().setAttribute("message", 0);
         }
-        request.setAttribute("message", mensaje);
         
         response.sendRedirect("SvProductos");
     }

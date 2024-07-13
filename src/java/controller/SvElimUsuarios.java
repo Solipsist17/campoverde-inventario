@@ -48,10 +48,13 @@ public class SvElimUsuarios extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Empleado empleado = new Empleado(id);
         EmpleadoDAO dao = new EmpleadoDAOImpl();
-        String mensaje = dao.eliminarUsuario(empleado);
-        request.setAttribute("message", mensaje);
         
-        //request.getRequestDispatcher("SvUsuarios").forward(request, response); // redirigir 
+        if (dao.eliminarUsuario(empleado)) {
+            request.getSession().setAttribute("message", 1);
+        } else {
+            request.getSession().setAttribute("message", 0);
+        }
+        
         response.sendRedirect("SvUsuarios");
     }
 

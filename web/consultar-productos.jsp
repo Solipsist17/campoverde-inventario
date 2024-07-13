@@ -7,6 +7,23 @@
 <%@include file="components/head.jsp" %>
 <%@include file="components/body1.jsp" %>
 
+<!-- Altert Message -->
+<%
+Object messageObj = miSession.getAttribute("message");
+if (messageObj != null) {
+    int message = Integer.parseInt(messageObj.toString());
+%>
+<div class="alert alert-<%= (message == 1) ? "success" : "danger" %> alert-dismissible fade show" role="alert">
+    <%= (message == 1) ? "¡Acción exitosa!" : "¡Acción fallida!" %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<%
+    miSession.setAttribute("message", null);
+}
+%>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
      <p>${message}</p>

@@ -7,6 +7,24 @@
 <%@include file="components/head.jsp" %>
 <%@include file="components/body1.jsp" %>
 
+<!-- Altert Message -->
+<%
+Object messageObj = miSession.getAttribute("message");
+if (messageObj != null) {
+    int message = Integer.parseInt(messageObj.toString());
+%>
+<div class="alert alert-<%= (message == 1) ? "success" : "danger" %> alert-dismissible fade show" role="alert">
+    <%= (message == 1) ? "¡Registro exitoso!" : "¡Registro fallido!" %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<%
+    miSession.setAttribute("message", null);
+}
+%>
+
+
 <h1 class="h3 mb-2 text-gray-800">Registrar Producto</h1>
 <p class="mb-4">A continuación podrá realizar el registro del producto</p>
 
