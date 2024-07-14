@@ -86,16 +86,12 @@ public class SvMovimientos extends HttpServlet {
         Movimiento movimiento = new Movimiento(new Contacto(idContacto), new Empleado(idEmpleado), new Producto(idProducto), precio, cantidad, fecha, tipo);
         MovimientoDAO dao = new MovimientoDAOImpl();
         
-        String message = "";
         if (dao.registrarMovimiento(movimiento)) {
-            message = "Movimiento registrado exitosamente";
             request.getSession().setAttribute("message", 1);
-            System.out.println(movimiento);
+            System.out.println("movimiento registrado: " + movimiento.toString());
         } else {
             request.getSession().setAttribute("message", 0);
-            message = "Error al registrar movimiento";
         }
-        request.setAttribute("message", message);
         
         response.sendRedirect("SvDatosMovimientos");
     }

@@ -100,6 +100,13 @@ public class Movimiento {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    @Override
+    public String toString() {
+        return "Movimiento{" + "id=" + id + ", contacto=" + contacto.getId() + ", empleado=" + empleado.getId() + ", producto=" + producto.getId() + ", precio=" + precio + ", cantidad=" + cantidad + ", fechaMovimiento=" + fechaMovimiento + ", tipoMovimiento=" + tipoMovimiento.toString() + '}';
+    }
+    
+    
     
     
 }

@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import model.Movimiento;
-import model.TipoMovimiento;
 
 @WebServlet(name = "SvElimMovimientos", urlPatterns = {"/SvElimMovimientos"})
 public class SvElimMovimientos extends HttpServlet {
@@ -47,7 +46,7 @@ public class SvElimMovimientos extends HttpServlet {
         MovimientoDAO dao = new MovimientoDAOImpl();
         if (dao.eliminarMovimiento(movimiento)) {
             request.getSession().setAttribute("message", 1);
-            System.out.println(movimiento);
+            System.out.println("movimiento eliminado: " + movimiento.getId());            
         } else {
             request.getSession().setAttribute("message", 0);
         }

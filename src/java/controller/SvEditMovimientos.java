@@ -129,7 +129,7 @@ public class SvEditMovimientos extends HttpServlet {
         MovimientoDAO dao = new MovimientoDAOImpl();
         if (dao.editarMovimiento(movimiento)) {
             request.getSession().setAttribute("message", 1);
-            System.out.println("movimiento editado: " + movimiento);
+            System.out.println("movimiento editado: " + movimiento.toString());            
         } else {
             request.getSession().setAttribute("message", 0);
         }

@@ -62,6 +62,7 @@ public class MovimientoDAOImpl implements MovimientoDAO{
         PreparedStatement stmt = null;
         
         try {
+            /*
             conn = ConexionDB.getConnection();
             String sql = "INSERT INTO movimientos (id_contacto, id_empleado, id_producto, precio, cantidad, fecha_movimiento, tipo_movimiento) VALUES (?,?,?,?,?,?,?)";
             stmt = conn.prepareStatement(sql);
@@ -77,6 +78,23 @@ public class MovimientoDAOImpl implements MovimientoDAO{
             
             stmt.setString(7, movimiento.getTipoMovimiento().toString());
             stmt.executeUpdate();
+            */
+            conn = ConexionDB.getConnection();
+            String sql = "CALL registrar_movimiento(?,?,?,?,?,?,?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, movimiento.getContacto().getId());
+            stmt.setInt(2, movimiento.getEmpleado().getId());
+            stmt.setInt(3, movimiento.getProducto().getId());
+            stmt.setDouble(4, movimiento.getPrecio());
+            stmt.setInt(5, movimiento.getCantidad());
+            
+            java.util.Date dateUtil = movimiento.getFechaMovimiento(); // objeto java.util.Date
+            java.sql.Date dateSql = new java.sql.Date(dateUtil.getTime());
+            stmt.setDate(6, dateSql);
+            
+            stmt.setString(7, movimiento.getTipoMovimiento().toString());
+            stmt.executeUpdate();
+            
             return true;
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -93,7 +111,7 @@ public class MovimientoDAOImpl implements MovimientoDAO{
         
         try {
             conn = ConexionDB.getConnection();
-            String sql = "DELETE FROM movimientos WHERE id_movimiento=?";
+            String sql = "CALL eliminar_movimiento(?)";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, movimiento.getId());
             stmt.executeUpdate();
@@ -149,7 +167,7 @@ public class MovimientoDAOImpl implements MovimientoDAO{
         
         try {
             conn = ConexionDB.getConnection();
-            String sql = "UPDATE movimientos SET id_contacto=?, id_empleado=?, id_producto=?, precio=?, cantidad=?, fecha_movimiento=?, tipo_movimiento=? WHERE id_movimiento=?";
+            String sql = "CALL editar_movimiento(?,?,?,?,?,?,?,?)";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, movimiento.getContacto().getId());
             stmt.setInt(2, movimiento.getEmpleado().getId());
