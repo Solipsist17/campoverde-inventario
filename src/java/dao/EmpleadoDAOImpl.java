@@ -54,7 +54,8 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
             stmt.executeUpdate();
             return true;
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("id de usuario: " + empleado.getId());
             return false;
         } finally {
             ConexionDB.closeConnection(conn);

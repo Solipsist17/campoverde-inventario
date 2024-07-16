@@ -70,13 +70,52 @@ if (messageObj != null) {
                 	    <td><%= empleado.getCorreo() %></td>
                             
                             <td style="display: flex; width: 230px;">
+                                
                                 <!-- Botón eliminar -->
+                                
+                                <!-- Button trigger modal -->
+                                <form>
+                                    <button type="button" class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#eliminarUsuarioModal_<%= empleado.getId() %>" 
+                                            style="background-color: red; margin-right: 5px">
+                                        <i class="fas fa-trash-alt"></i>
+                                        Eliminar
+                                    </button>
+                                </form>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="eliminarUsuarioModal_<%= empleado.getId() %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">¿Seguro que quiere desactivar este usuario?</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <!--<div class="modal-body">Seleccione "Aceptar" si quieere eliminar</div>-->
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+
+                                                <form name="eliminar" action="SvElimUsuarios" method="post">
+                                                    <button class="btn btn-primary"" type="submit"> 
+                                                        Aceptar
+                                                    </button>
+                                                    <input type="hidden" name="id" value="<%= empleado.getId() %>">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--
                                 <form name="eliminar" action="SvElimUsuarios" method="post">
                                     <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color: red; margin-right: 5px">
                                     <i class="fas fa-trash-alt"></i> Eliminar
                                     </button>
                                     <input type="hidden" name="id" value="<%= empleado.getId() %>">
                                 </form>
+                                -->
+                                
                                 <!-- Botón editar -->
                                 <form name="editar" action="SvEditUsuarios" method="get">
                                     <button type="submit" class="btn btn-success btn-user btn-block" style="margin-left: 5px">

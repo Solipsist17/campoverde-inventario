@@ -59,10 +59,12 @@
         </select>
     </div>
 
+    
     <div class="form-group">
-        <input type="number" min="0" step="1" class="form-control form-control-user" id="stock" name="stock"
+        <input disabled type="number" min="0" step="1" class="form-control form-control-user" id="stock" name="stock"
                placeholder="Stock" required value="<%= producto.getStock() %>">
     </div>
+    
     
     <div class="form-group">
         <input type="number" min="0" step="0.01" class="form-control form-control-user" id="precio" name="precio"

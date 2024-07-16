@@ -84,14 +84,14 @@ public class SvEditProductos extends HttpServlet {
         String nombre = request.getParameter("nombre");
         int idCategoria = Integer.parseInt(request.getParameter("categoria"));
         int idUbicacion = Integer.parseInt(request.getParameter("ubicacion"));
-        int stock = Integer.parseInt(request.getParameter("stock"));
+        //int stock = Integer.parseInt(request.getParameter("stock"));
         double precio = Double.parseDouble(request.getParameter("precio"));
         
         Producto producto = (Producto) request.getSession().getAttribute("prodEditar");
         producto.setNombre(nombre);
         producto.setCategoria(new Categoria(idCategoria));
         producto.setUbicacion(new Ubicacion(idUbicacion));
-        producto.setStock(stock);
+        //producto.setStock(stock);
         producto.setPrecio(precio);
         
         ProductoDAO dao = new ProductoDAOImpl();

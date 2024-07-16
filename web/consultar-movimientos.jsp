@@ -84,12 +84,15 @@ if (messageObj != null) {
                             
                             <td style="display: flex; width: 230px;">
                                 <!-- Botón eliminar -->
+                                <!--
                                 <form name="eliminar" action="SvElimMovimientos" method="post">
                                     <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color: red; margin-right: 5px">
                                     <i class="fas fa-trash-alt"></i> Eliminar
                                     </button>
                                     <input type="hidden" name="id" value="<%= movimiento.getId() %>">
                                 </form>
+                                -->
+                                
                                 <!-- Botón editar -->
                                 <form name="editar" action="SvEditMovimientos" method="get">
                                     <button type="submit" class="btn btn-success btn-user btn-block" style="margin-left: 5px">

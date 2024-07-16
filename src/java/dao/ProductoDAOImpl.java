@@ -99,14 +99,14 @@ public class ProductoDAOImpl implements ProductoDAO {
         
         try {
             conn = ConexionDB.getConnection();
-            String sql = "UPDATE productos SET id_categoria=?, id_ubicacion=?, nombre_producto=?, stock=?, precio_individual=? WHERE id_producto=?";
+            String sql = "UPDATE productos SET id_categoria=?, id_ubicacion=?, nombre_producto=?, precio_individual=? WHERE id_producto=?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, producto.getCategoria().getId());
             stmt.setInt(2, producto.getUbicacion().getId());
             stmt.setString(3, producto.getNombre());
-            stmt.setInt(4, producto.getStock());
-            stmt.setDouble(5, producto.getPrecio());
-            stmt.setInt(6, producto.getId());
+            //stmt.setInt(4, producto.getStock());
+            stmt.setDouble(4, producto.getPrecio());
+            stmt.setInt(5, producto.getId());
             stmt.executeUpdate();
             return true;
         } catch (ClassNotFoundException | SQLException e) {
